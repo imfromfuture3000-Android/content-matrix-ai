@@ -1,0 +1,51 @@
+name: Revenue Loop
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 8 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: revenue-loop
+  cancel-in-progress: false
+
+jobs:
+  plan-and-measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate reviewable revenue pack
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: python scripts/revenue_loop.py --out reports
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: revenue-loop-report-${{ github.run_number }}
+          path: reports/revenue-loop-*.md
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Commit report only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          if git diff --cached --quiet; then
+            echo "No report changes to commit"
+          else
+            git commit -m "chore: add revenue loop report"
+            git push
+          fi
