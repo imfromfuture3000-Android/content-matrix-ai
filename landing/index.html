@@ -3,36 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Content Matrix — One long video. Twelve assets.</title>
+  <title>Content Matrix AI — One long video. Twelve assets.</title>
+  <meta name="description" content="Prompt pack and workflow that turns one long-form video or podcast into Shorts, threads, carousels, email, and a content database." />
   <style>
-    :root { --bg:#0b0d10; --card:#14181e; --fg:#e8edf2; --mut:#9aa6b2; --acc:#3ee0a2; }
+    :root { --bg:#07090c; --card:#12161c; --fg:#eef3f7; --mut:#93a0ab; --acc:#3ee0a2; --line:#24303a; }
     * { box-sizing:border-box; }
-    body { margin:0; font-family: ui-sans-serif, system-ui, Inter, sans-serif; background:var(--bg); color:var(--fg); line-height:1.5; }
-    .wrap { max-width:880px; margin:0 auto; padding:48px 20px 80px; }
-    h1 { font-size:clamp(28px,5vw,48px); letter-spacing:-.03em; margin:0 0 12px; }
-    .sub { color:var(--mut); font-size:18px; margin-bottom:28px; }
-    .price { display:inline-block; background:#1c242c; border:1px solid #2a333c; padding:10px 14px; border-radius:8px; margin-bottom:24px; }
-    .grid { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin:28px 0; }
-    .card { background:var(--card); padding:18px; border-radius:12px; border:1px solid #222a32; }
-    a.btn { display:inline-block; background:var(--acc); color:#042016; font-weight:700; text-decoration:none; padding:14px 22px; border-radius:10px; }
-    footer { color:var(--mut); margin-top:48px; font-size:13px; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, Inter, sans-serif; background:radial-gradient(1200px 600px at 10% -10%, #12352a 0%, var(--bg) 45%); color:var(--fg); line-height:1.55; }
+    .wrap { max-width:920px; margin:0 auto; padding:56px 20px 96px; }
+    h1 { font-size:clamp(30px,5.4vw,52px); letter-spacing:-.04em; margin:0 0 14px; line-height:1.08; }
+    .sub { color:var(--mut); font-size:18px; margin-bottom:24px; max-width:640px; }
+    .price { display:inline-flex; gap:12px; align-items:center; flex-wrap:wrap; background:#11181f; border:1px solid var(--line); padding:10px 14px; border-radius:10px; margin-bottom:22px; }
+    .grid { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); margin:32px 0; }
+    .card { background:var(--card); padding:18px; border-radius:14px; border:1px solid var(--line); }
+    a.btn { display:inline-block; background:var(--acc); color:#042016; font-weight:800; text-decoration:none; padding:14px 22px; border-radius:10px; }
+    a.ghost { color:var(--acc); margin-left:14px; }
+    footer { color:var(--mut); margin-top:56px; font-size:13px; }
+    ol { color:var(--mut); }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <p style="color:var(--acc);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px;">Digital product + system</p>
-    <h1>Turn one piece of content into a week of distribution.</h1>
-    <p class="sub">Prompt pack + workflow for YouTube, Shorts, X, LinkedIn, email, and a Notion-style tracker. Built for solo creators who refuse to burn out on manual repurposing.</p>
-    <div class="price">Validation price: $29 · License: your channels, commercial use</div>
-    <p><a class="btn" href="https://github.com/imfromfuture3000-Android/content-matrix-ai">Get the pack on GitHub</a></p>
+    <p style="color:var(--acc);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:12px;">Content Matrix AI · Cycle 1</p>
+    <h1>Stop remaking the same idea twelve times.</h1>
+    <p class="sub">A creator system that turns one long-form video or podcast into Shorts, X threads, LinkedIn carousels, emails, SEO titles, and a tracking database — without a custom SaaS bill.</p>
+    <div class="price"><strong>$29 validation price</strong><span style="color:var(--mut)">Commercial use on your own channels</span></div>
+    <p>
+      <a class="btn" href="https://github.com/imfromfuture3000-Android/content-matrix-ai/blob/main/product/CONTENT_MATRIX_PROMPTS.md">Open the prompt pack</a>
+      <a class="ghost" href="https://github.com/imfromfuture3000-Android/content-matrix-ai">Full repo</a>
+    </p>
     <div class="grid">
-      <div class="card"><strong>8 core prompts</strong><br/>Master repurpose, hooks, scripts, SEO, outreach.</div>
-      <div class="card"><strong>30-day calendar</strong><br/>Finance + AI tools + systems niches.</div>
-      <div class="card"><strong>Agency one-pager</strong><br/>$2k–$5k setup offer you can send this week.</div>
-      <div class="card"><strong>ROI tracker</strong><br/>Spreadsheet for CAC, LTV, experiments.</div>
+      <div class="card"><strong>8 production prompts</strong><br/>Master repurpose, hooks, scripts, SEO, outreach.</div>
+      <div class="card"><strong>30-day calendar</strong><br/>Finance explainers, AI tools, systems niches.</div>
+      <div class="card"><strong>Agency one-pager</strong><br/>$2k–$5k done-for-you setup you can send this week.</div>
+      <div class="card"><strong>Metrics CSV</strong><br/>Track experiments before you buy ads.</div>
     </div>
-    <p>Replace the GitHub button with Gumroad/Lemon Squeezy when you add checkout. Host this file on Carrd, Cloudflare Pages, or GitHub Pages.</p>
-    <footer>No fake guarantees. Disclose AI-assisted content where platforms require it. Do not give personalized financial advice in faceless finance videos.</footer>
+    <h2>7-day launch order</h2>
+    <ol>
+      <li>Host this page on GitHub Pages.</li>
+      <li>Zip the product folder and sell on Gumroad / Lemon Squeezy.</li>
+      <li>Replace the button above with checkout.</li>
+      <li>Ship three Shorts from the calendar. Disclose AI where required.</li>
+      <li>Send ten personalized (not blasted) agency notes.</li>
+    </ol>
+    <footer>No income guarantees. No personalized financial advice in faceless finance videos. Platforms require honest AI disclosure in many regions.</footer>
   </div>
 </body>
 </html>
