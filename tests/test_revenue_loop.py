@@ -14,6 +14,10 @@ class RevenueLoopTests(unittest.TestCase):
         self.assertEqual(module.pct(1, 0), "n/a")
         self.assertEqual(module.pct(2, 4), "50.0%")
 
+    def test_fidelity_blocks_missing_proof(self):
+        self.assertEqual(module.fidelity_status({"proof_needed": ""}), "blocked")
+        self.assertEqual(module.fidelity_status({"proof_needed": "Owned transcript"}), "ready-for-review")
+
     def test_report_has_guardrails_and_real_inputs(self):
         with tempfile.TemporaryDirectory() as directory:
             tmp_path = Path(directory)
@@ -38,7 +42,9 @@ class RevenueLoopTests(unittest.TestCase):
             self.assertIn("Human approval", report)
             self.assertIn("does not publish", report)
             self.assertIn("Test", report)
+            self.assertIn("ready-for-review", report)
             self.assertIn("Recorded revenue: **$1,058.00**", summary)
+            self.assertIn("Blocked topics: **0**", summary)
 
 
 if __name__ == "__main__":
