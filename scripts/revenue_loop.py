@@ -33,6 +33,17 @@ def money(n: float) -> str:
     return f"${n:,.2f}"
 
 
+def fidelity_status(topic: dict[str, str]) -> str:
+    """Block a topic until a human can point at owned proof.
+
+    Empty proof_needed means the derivative has no source passage yet.
+    That is the failure mode called out by people-first content review
+    and by repurposing workflows that require a named source per asset.
+    """
+    proof = (topic.get("proof_needed") or "").strip()
+    return "ready-for-review" if proof else "blocked"
+
+
 def build_report(run_date: dt.date, site_url: str) -> tuple[str, str]:
     topics = read_csv(TOPICS)
     metrics = read_csv(METRICS)
@@ -50,6 +61,12 @@ def build_report(run_date: dt.date, site_url: str) -> tuple[str, str]:
         f"{html.escape(t.get('offer_angle', ''))} | {html.escape(t.get('proof_needed', ''))} |"
         for t in selected
     ) or "| Add topics in `automation/topics.csv` | | | |"
+
+    fidelity_rows = "\n".join(
+        f"| {html.escape(t.get('topic', ''))} | {html.escape(t.get('proof_needed', ''))} | {fidelity_status(t)} |"
+        for t in selected
+    ) or "| Add topics in `automation/topics.csv` | | blocked |"
+    blocked = sum(1 for t in selected if fidelity_status(t) == "blocked")
 
     report = f"""# Revenue Loop Report — {run_date.isoformat()}
 
@@ -75,11 +92,22 @@ def build_report(run_date: dt.date, site_url: str) -> tuple[str, str]:
 |---|---|---|---|
 {rows}
 
+## Claim fidelity gate
+
+Topics without `proof_needed` are **blocked**. Do not record derivatives from a blocked row. See `content-engine/CLAIM_FIDELITY_GATE.md`.
+
+| Topic | Proof on file | Status |
+|---|---|---|
+{fidelity_rows}
+
+Blocked topics this cycle: {blocked}
+
 ## Human execution checklist
 
 **Human approval is required before publication, outreach, or any commercial action.**
 
 - [ ] Select one topic and add a real source, example, or customer observation.
+- [ ] Paste the source passage into the claim-fidelity gate before writing hooks.
 - [ ] Produce one useful long-form asset and repurpose it with the existing prompt pack.
 - [ ] Review every claim, disclosure, and link before publication.
 - [ ] Publish only on channels you control and comply with their policies.
@@ -106,7 +134,7 @@ If this cycle produces at least one qualified lead or one sale, repeat the angle
     summary = (
         f"## Revenue Loop — {run_date.isoformat()}\n"
         f"Recorded revenue: **{money(revenue)}** · Qualified leads: **{leads:.0f}** · "
-        f"Visit→lead: **{pct(leads, visits)}**\n\n"
+        f"Visit→lead: **{pct(leads, visits)}** · Blocked topics: **{blocked}**\n\n"
         "Human approval is required before publication or outreach."
     )
     return report, summary
